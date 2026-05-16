@@ -28,7 +28,7 @@ button {
 .auth-shell {
   align-items: center;
   background:
-    linear-gradient(120deg, rgba(22, 120, 104, 0.9), rgba(26, 47, 77, 0.82)),
+    linear-gradient(120deg, rgba(126, 34, 206, 0.88), rgba(49, 46, 129, 0.85)),
     url("https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1800&q=80") center/cover;
   display: flex;
   min-height: 100vh;
@@ -128,7 +128,7 @@ select[multiple] {
 }
 
 .primary {
-  background: #167868;
+  background: #7e22ce;
   color: white;
   font-weight: 700;
 }
