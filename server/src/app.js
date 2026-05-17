@@ -15,7 +15,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 app.use(helmet({ contentSecurityPolicy: false }));
-app.use(cors());
+
+app.use(
+  cors({
+    origin: "https://team-task-manager-client-production-11a9.up.railway.app",
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(morgan("dev"));
 
@@ -30,15 +37,21 @@ app.use("/api/tasks", taskRoutes);
 app.use("/api/dashboard", dashboardRoutes);
 
 const clientDist = path.resolve(__dirname, "../../client/dist");
+
 app.use(express.static(clientDist));
+
 app.get("*", (req, res, next) => {
   if (req.path.startsWith("/api")) return next();
+
   res.sendFile(path.join(clientDist, "index.html"));
 });
 
 app.use((err, _req, res, _next) => {
   console.error(err);
-  res.status(err.status || 500).json({ message: err.message || "Server error" });
+
+  res.status(err.status || 500).json({
+    message: err.message || "Server error",
+  });
 });
 
 export default app;
