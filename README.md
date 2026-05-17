@@ -69,7 +69,7 @@ Demo accounts:
 
 ## Submission Checklist
 
-- Live URL: add Railway URL here
-- GitHub repo: add repository URL here
+- Live URL: https://team-task-manager-client-production-11a9.up.railway.app
+- GitHub repo: https://github.com/RajSen17/Team-task-management
 - README: included
-- Demo video: record a 2-5 minute walkthrough showing login, project creation, task assignment, dashboard, and role restrictions
+
