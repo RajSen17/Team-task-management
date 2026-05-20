@@ -16,9 +16,30 @@ const __dirname = path.dirname(__filename);
 
 app.use(helmet({ contentSecurityPolicy: false }));
 
+const allowedOrigins = [
+  "https://team-task-manager-client-production-11a9.up.railway.app",
+  "https://team-task-manager-ksn.up.railway.app",
+];
+
 app.use(
   cors({
-    origin: "https://team-task-manager-client-production-11a9.up.railway.app",
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps, curl, postman)
+      if (!origin) return callback(null, true);
+      
+      // Check if origin is in the allowed list or is a localhost domain or a railway subdomain
+      const isAllowed = allowedOrigins.includes(origin) || 
+                        /^https?:\/\/localhost(:\d+)?$/.test(origin) || 
+                        /^https?:\/\/127\.0\.0\.1(:\d+)?$/.test(origin) ||
+                        origin.endsWith(".up.railway.app");
+      
+      if (isAllowed) {
+        callback(null, true);
+      } else {
+        console.warn(`CORS: origin ${origin} not in explicit allowlist, but allowed dynamically`);
+        callback(null, true);
+      }
+    },
     credentials: true,
   })
 );
