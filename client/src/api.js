@@ -1,7 +1,15 @@
 import axios from "axios";
 
+const getBaseURL = () => {
+  const url = import.meta.env.VITE_API_URL;
+  if (!url || url === "undefined") {
+    return "/api";
+  }
+  return url.endsWith("/") ? `${url}api` : `${url}/api`;
+};
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_URL + "/api",
+  baseURL: getBaseURL(),
 });
 
 api.interceptors.request.use((config) => {
